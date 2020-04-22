@@ -6,19 +6,22 @@ Adapted by TFE Energy. Learn more about our work on tfe.energy or write to phili
 
 ## Donwload OSM data
 
-Larger OSM datasets can be downloaded from Geofabrik [here](https://download.geofabrik.de/)
+Larger OSM datasets can be downloaded from Geofabrik [here](https://download.geofabrik.de/).
 Select the .osm.pbf file of the country you want to study. 
 
 ## Prepare  OSRM
-Once the OSM data has downloaded, navigate to the ./data folder where the .osm.pbf file is located and set up OSRM:
+Once the OSM data has downloaded, navigate to the ./data folder where the .osm.pbf file is located and set up OSRM (here with the file "ethiopia-latest.osm.pbf" downloaded from Geofabrik):
 
     docker run -t -dv "$PWD:/data" osrm/osrm-backend osrm-extract -p /opt/car.lua /data/ethiopia-latest.osm.pbf
     docker run -t -v "$PWD:/data" osrm/osrm-backend osrm-contract /data/ethiopia-latest.osm.pbf
     docker run -t -i -p 5000:5000 -v $PWD:/data osrm/osrm-backend osrm-routed --algorithm ch /data/ethiopia-latest.osrm
+
+To open the frontend, type:
+
     docker run -p 9966:9966 osrm/osrm-frontend
     open 'http://127.0.0.1:9966'
-
-More information can be found [here](https://github.com/Project-OSRM/osrm-backend).
+    
+More information on how to set up OSRM can be found [here](https://github.com/Project-OSRM/osrm-backend).
     
 ## Facebook HRSL data
 The 30m population high-resolution settlement layer for Ethiopia (in .geotiff format) can be downloaded [here](https://data.humdata.org/organization/facebook?q=ethiopia&ext_page_size=25).
