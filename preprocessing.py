@@ -76,7 +76,7 @@ def n_closest_geodetic(destinations,origins,n_keep,verbose=False):
     Input: destinations,origins <Geopandas>
     Output: destinations filtered <Geopandas>
     """
-    destinations=destinations.to_crs(origins.crs)
+    #destinations=destinations.to_crs(origins.crs)
     filtered=gdp.GeoDataFrame()
 
     if verbose:
@@ -86,7 +86,7 @@ def n_closest_geodetic(destinations,origins,n_keep,verbose=False):
         if verbose:
             i=i+1
             print("Doing %i of %i\r"%(i,l),end="")
-        distances=destinations.distance(origins.loc[index].geometry)
+        distances = destinations.distance(origins.loc[index].geometry)
         if len(distances) < n_keep:
             n_keep = len(distances)
         indices=np.argsort(distances.values)[:n_keep]
